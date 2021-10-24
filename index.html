@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Welcome</title>
+</head>
+<body style="background-color: grey; color: white;">
+  <header>
+    <h1>Bienvenido</h1>
+  </header>
+  <form action="">
+    <h2>Ingresa el nombre de un País</h2>
+    <label for="">
+      <input list="countries">
+      <datalist id="countries">
+        
+      </datalist>
+    </label>
+  </form>
+
+  <script >
+    async function showCountries() {
+      const responses = await fetch('https://travelbriefing.org/countries.json')
+      const resolve = await responses.json()
+
+      resolve.forEach((data) => {
+        const options = document.querySelector('#countries')
+        
+        const selectCountry = document.createElement('option')
+        selectCountry.textContent = data.name
+        
+        options.append(selectCountry )
+      })
+    }
+
+    showCountries()
+  </script>
+</body>
+</html>
