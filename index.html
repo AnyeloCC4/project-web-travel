@@ -20,22 +20,43 @@
     </label>
   </form>
 
+  <div id="app"></div>
   <script >
-    async function showCountries() {
-      const responses = await fetch('https://travelbriefing.org/countries.json')
-      const resolve = await responses.json()
+    const API = 'https://travelbriefing.org/countries.json'
 
-      resolve.forEach((data) => {
-        const options = document.querySelector('#countries')
-        
-        const selectCountry = document.createElement('option')
-        selectCountry.textContent = data.name
-        
-        options.append(selectCountry )
+    const request = fetch(API)
+      .then(response => response.json())
+      .then(data => {
+        data.forEach((item) => {
+          const selectCountry = document.querySelector('#countries')
+          const optionsCountries = document.createElement('option')
+          optionsCountries.textContent = item.name
+          selectCountry.append(optionsCountries)
+        })
       })
-    }
+      .then(() => {
+        const referenceInput = document.querySelector('input')
+          referenceInput.addEventListener('change', () => {
+          const selectedCountry = document.querySelector('input').value
 
-    showCountries()
+          const requestCountry = fetch(`https://travelbriefing.org/${selectedCountry}?format=json`)
+          .then(newResponse => newResponse.json())
+          .then(newData => {
+            const nameCountry = document.createElement('h2')
+            nameCountry.textContent = newData.names.name
+
+            const fullNameCountry = document.createElement('h3')
+            fullNameCountry.textContent = newData.names.full
+
+            const container = document.createElement('div')
+            container.append(nameCountry, fullNameCountry)
+
+            const origin = document.querySelector('#app')
+            origin.append(container)
+          })
+        })
+        
+      })
   </script>
 </body>
 </html>
