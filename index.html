@@ -5,15 +5,16 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Welcome</title>
+  <link rel="stylesheet" href="./style/style.css">
 </head>
-<body style="background-color: grey; color: white;">
+<body>
   <header>
     <h1>Bienvenido</h1>
   </header>
   <form action="">
     <h2>Ingresa el nombre de un País</h2>
     <label for="">
-      <input list="countries">
+      <input list="countries" placeholder="Nombre de un Pais">
       <datalist id="countries">
         
       </datalist>
@@ -40,19 +41,38 @@
           const selectedCountry = document.querySelector('input').value
 
           const requestCountry = fetch(`https://travelbriefing.org/${selectedCountry}?format=json`)
-          .then(newResponse => newResponse.json())
-          .then(newData => {
+          .then(response => response.json())
+          .then(data => {
+            /* Seccion presentacion País */
+            const sectionPresentation = document.createElement('section')
+            
             const nameCountry = document.createElement('h2')
-            nameCountry.textContent = newData.names.name
+            nameCountry.textContent = data.names.name
 
             const fullNameCountry = document.createElement('h3')
-            fullNameCountry.textContent = newData.names.full
+            fullNameCountry.textContent = data.names.full
+
+            const neighbors = document.createElement('p')
+            neighbors.textContent = `Other countries in the neighborhood of ${data.names.name} are ${data.neighbors.map((data) => data.name)}`
+
+            sectionPresentation.append(nameCountry, fullNameCountry, neighbors)
+
+            /* Fin Seccion Presentacion País */
+
+            /* Inicio Seccion Consejo de Viaje */
+
+            const sectionAdvise = document.createElement('section')
+
+            const titleAdvise = document.createElement('h3')
+            titleAdvise.textContent = 'Travel Advise'
+
+            sectionAdvise.append(titleAdvise)
 
             const container = document.createElement('div')
-            container.append(nameCountry, fullNameCountry)
+            container.append(sectionPresentation, sectionAdvise)
 
-            const origin = document.querySelector('#app')
-            origin.append(container)
+            const mainContainer = document.querySelector('#app')
+            mainContainer.append(container)
           })
         })
         
