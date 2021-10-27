@@ -66,7 +66,31 @@
             const titleAdvise = document.createElement('h3')
             titleAdvise.textContent = 'Travel Advise'
 
-            sectionAdvise.append(titleAdvise)
+            const firstAdvise = document.createElement('p')
+            firstAdvise.textContent = data.advise.UA.advise
+
+            const urlFirstAdvise = document.createElement('a')
+            urlFirstAdvise.href = data.advise.UA.url
+            urlFirstAdvise.target = '_blank'
+            urlFirstAdvise.rel = 'noopener'
+            urlFirstAdvise.textContent = 'Full report'
+
+            // const secondAdvise = document.createElement('p')
+            // // secondAdvise.textContent = data.advise.CA.url
+            
+            // if(data.advise.CA === undefined) {
+            //     console.log('Hola Mundo para rellenar')
+            //   } else {
+            //     secondAdvise.textContent = data.advise.CA.advise
+            //   }
+              
+            // const urlSecondAdvise = document.createElement('a')
+            // urlSecondAdvise.href = console.log(data.advise.CA.url)
+            // urlSecondAdvise.target = '_blank'
+            // urlSecondAdvise.rel = 'noopener'
+            // urlSecondAdvise.textContent = 'Full report'
+
+            sectionAdvise.append(titleAdvise, firstAdvise, urlFirstAdvise)
 
             const container = document.createElement('div')
             container.append(sectionPresentation, sectionAdvise)
