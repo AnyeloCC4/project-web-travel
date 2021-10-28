@@ -24,6 +24,7 @@
   <div id="app"></div>
   <script >
     const API = 'https://travelbriefing.org/countries.json'
+    const allCountry = []
 
     const request = fetch(API)
       .then(response => response.json())
@@ -32,6 +33,7 @@
           const selectCountry = document.querySelector('#countries')
           const optionsCountries = document.createElement('option')
           optionsCountries.textContent = item.name
+          allCountry.push(optionsCountries)
           selectCountry.append(optionsCountries)
         })
       })
@@ -43,7 +45,7 @@
           const requestCountry = fetch(`https://travelbriefing.org/${selectedCountry}?format=json`)
           .then(response => response.json())
           .then(data => {
-            /* Seccion presentacion País */
+            /* Start Section Presentation Country */
             const sectionPresentation = document.createElement('section')
             
             const nameCountry = document.createElement('h2')
@@ -57,9 +59,13 @@
 
             sectionPresentation.append(nameCountry, fullNameCountry, neighbors)
 
-            /* Fin Seccion Presentacion País */
+            /* End Section Presentation Country */
 
-            /* Inicio Seccion Consejo de Viaje */
+
+
+
+
+            /* Start Section Advice Travel */
 
             const sectionAdvise = document.createElement('section')
 
@@ -75,25 +81,105 @@
             urlFirstAdvise.rel = 'noopener'
             urlFirstAdvise.textContent = 'Full report'
 
-            // const secondAdvise = document.createElement('p')
-            // // secondAdvise.textContent = data.advise.CA.url
+            const secondAdvise = document.createElement('p')
+            const urlSecondAdvise = document.createElement('a')
             
-            // if(data.advise.CA === undefined) {
-            //     console.log('Hola Mundo para rellenar')
-            //   } else {
-            //     secondAdvise.textContent = data.advise.CA.advise
-            //   }
+            if(data.advise.CA === undefined) {
+                console.log('Hola Mundo para rellenar')
+              } else {
+                secondAdvise.textContent = data.advise.CA.advise
+                urlSecondAdvise.href = data.advise.CA.url
+              }
               
-            // const urlSecondAdvise = document.createElement('a')
-            // urlSecondAdvise.href = console.log(data.advise.CA.url)
-            // urlSecondAdvise.target = '_blank'
-            // urlSecondAdvise.rel = 'noopener'
-            // urlSecondAdvise.textContent = 'Full report'
+            urlSecondAdvise.target = '_blank'
+            urlSecondAdvise.rel = 'noopener'
+            urlSecondAdvise.textContent = 'Full report'
 
-            sectionAdvise.append(titleAdvise, firstAdvise, urlFirstAdvise)
+            sectionAdvise.append(titleAdvise, firstAdvise, urlFirstAdvise, secondAdvise, urlSecondAdvise)
 
+            /* End Section Advise Travel */
+
+
+
+
+
+            /* Start Section Water */
+            const sectionWater = document.createElement('section')
+
+            const titleWater = document.createElement('h3')
+            titleWater.textContent = 'Drinking Water'
+
+            const stateWater = document.createElement('p')
+            stateWater.textContent = `Drinkig tap water in ${data.names.name} is ${data.water.short}.`
+            
+            sectionWater.append(titleWater, stateWater)
+
+            /* End Section Water */
+
+            /* Start Section  TimeZone*/
+            const sectionTimeZone = document.createElement('section')
+
+            const titleTimeZone = document.createElement('h3')
+            titleTimeZone.textContent = 'Timezone'
+
+            const actualTimeZone = document.createElement('p')
+            actualTimeZone.textContent = data.timezone.name
+
+            sectionTimeZone.append(titleTimeZone, actualTimeZone)
+
+            /* End Section TimeZone */
+            
+            /* Start Section Visa */
+            const sectionVisa = document.createElement('section')
+
+            const titleVisa = document.createElement('h3')
+            titleVisa.textContent = 'Visa requirements'
+
+            sectionVisa.append(titleVisa)
+
+            /* End Section Visa */
+
+            /* Start Section Currency */
+            const sectionCurrency = document.createElement('section')
+
+            const titleCurrency = document.createElement('h3')
+            titleVisa.textContent = 'Currency'
+
+            const actualCurrency = document.createElement('p')
+            actualCurrency.textContent = `The currency in ${data.names.name} is ${data.currency.name} (${data.currency.symbol}) `
+
+            const formCurrency = document.createElement('div')
+              /* First Container */
+            const formCurrencyRate = document.createElement('div')
+            const subtitleCurrency = document.createElement('h4')
+            subtitleCurrency.textContent = data.currency.name
+            const inputCurrency = document.createElement('input')
+            inputCurrency.type = 'number'
+            formCurrencyRate.append(subtitleCurrency, inputCurrency) 
+              /* Second Container */
+            const formCompare = document.createElement('div')
+            const countryList = document.createElement('input')
+            countryList.setAttribute('list', 'countryRate')
+            countryList.placeholder = ''
+            const dataCountry = document.createElement('datalist')
+            dataCountry.id = 'countryRate'
+            const optionCountry = document.createElement('option')
+            console.log(allCountry.map((data) => data.textContent))
+            allCountry.map((data) => optionCountry.textContent = data.textContent)
+            countryList.append(dataCountry)
+            dataCountry.append(optionCountry)
+            formCompare.append(countryList)
+
+            formCurrency.append(formCurrencyRate, formCompare)
+
+            sectionCurrency.append(titleCurrency, actualCurrency, formCurrency)
+
+            /* End Section Currency */
+
+
+            
             const container = document.createElement('div')
-            container.append(sectionPresentation, sectionAdvise)
+            container.append(sectionPresentation, sectionAdvise, sectionWater, sectionTimeZone, sectionCurrency)
 
             const mainContainer = document.querySelector('#app')
             mainContainer.append(container)
