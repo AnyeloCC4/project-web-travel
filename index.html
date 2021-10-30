@@ -33,7 +33,7 @@
           const selectCountry = document.querySelector('#countries')
           const optionsCountries = document.createElement('option')
           optionsCountries.textContent = item.name
-          allCountry.push(optionsCountries)
+          allCountry.push(item.name)
           selectCountry.append(optionsCountries)
         })
       })
@@ -160,14 +160,19 @@
             const formCompare = document.createElement('div')
             const countryList = document.createElement('input')
             countryList.setAttribute('list', 'countryRate')
-            countryList.placeholder = ''
+            countryList.placeholder = 'ingresa un pais'
             const dataCountry = document.createElement('datalist')
             dataCountry.id = 'countryRate'
+            
             const optionCountry = document.createElement('option')
-            console.log(allCountry.map((data) => data.textContent))
-            allCountry.map((data) => optionCountry.textContent = data.textContent)
+            
+            // const optionCountry = document.createElement('option')
+            // optionCountry.textContent = `${allCountry.map((data) => optionCountry.textContent = data.textContent)}`
+            
+            // console.log(allCountry.map((data) => data.textContent))
+            // allCountry.map((data) => optionCountry.textContent = data.textContent)
+            
             countryList.append(dataCountry)
-            dataCountry.append(optionCountry)
             formCompare.append(countryList)
 
             formCurrency.append(formCurrencyRate, formCompare)
