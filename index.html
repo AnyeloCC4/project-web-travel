@@ -51,7 +51,7 @@
             const nameCountry = document.createElement('h2')
             nameCountry.textContent = data.names.name
 
-            const fullNameCountry = document.createElement('h3')
+            const fullNameCountry = document.createElement('h2')
             fullNameCountry.textContent = data.names.full
 
             const neighbors = document.createElement('p')
@@ -143,7 +143,7 @@
             const sectionCurrency = document.createElement('section')
 
             const titleCurrency = document.createElement('h3')
-            titleVisa.textContent = 'Currency'
+            titleCurrency.textContent = 'Currency'
 
             const actualCurrency = document.createElement('p')
             actualCurrency.textContent = `The currency in ${data.names.name} is ${data.currency.name} (${data.currency.symbol}) `
@@ -182,9 +182,37 @@
             /* End Section Currency */
 
 
+
+            /* Start Section Language */
+            const sectionLanguage = document.createElement('section')
+
+            const titleLanguage = document.createElement('h3')
+            titleLanguage.textContent = 'Language'
+
+            const speakLanguage = document.createElement('p')
+            speakLanguage.textContent = `The languages spoken in ${data.names.name} are ${data.language.map( (language) => {
+              if(language.official === 'Yes') {
+                return language.language
+              }
+              if(language.official === 'No') {
+
+                const noticeLanguage = document.createElement('span')
+                noticeLanguage.textContent = `(*) Not an official language / spoken in some parts of the country`
+                speakLanguage.append(noticeLanguage)
+                return `*${language.language}`
+              }
+            })}`
+          
+            
+            
+
+            sectionLanguage.append(titleLanguage, speakLanguage)
+
+
+            /* End Section Language */
             
             const container = document.createElement('div')
-            container.append(sectionPresentation, sectionAdvise, sectionWater, sectionTimeZone, sectionCurrency)
+            container.append(sectionPresentation, sectionAdvise, sectionWater, sectionTimeZone, sectionCurrency, sectionLanguage)
 
             const mainContainer = document.querySelector('#app')
             mainContainer.append(container)
