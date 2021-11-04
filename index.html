@@ -210,9 +210,44 @@
 
 
             /* End Section Language */
+
+
+
+
+            /* Start Section Weather */
+
+            /* End Section Weather */
             
+
+            /* Start Section Vaccination */
+
+            const sectionVaccination = document.createElement('section')
+
+            const titleVaccination = document.createElement('h3')
+            titleVaccination.textContent = 'Vaccination and Health'
+
+            const typesVaccines = document.createElement('div')
+            
+            const subtitleAndDescription = () => {
+
+              
+              const subtitleDisease = document.createElement('h4')
+              subtitleDisease.textContent = data.vaccinations.map((value) => value.name)
+              const descriptionDisease = document.createElement('p')
+              descriptionDisease.textContent = data.vaccinations.map((value) => value.message)
+
+              return [subtitleDisease, descriptionDisease]
+            }
+            
+            typesVaccines.append()
+
+            sectionVaccination.append(titleVaccination,typesVaccines)
+
+
+            /* End Section Vaccination */
+
             const container = document.createElement('div')
-            container.append(sectionPresentation, sectionAdvise, sectionWater, sectionTimeZone, sectionCurrency, sectionLanguage)
+            container.append(sectionPresentation, sectionAdvise, sectionWater, sectionTimeZone, sectionCurrency, sectionLanguage, sectionVaccination)
 
             const mainContainer = document.querySelector('#app')
             mainContainer.append(container)
