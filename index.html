@@ -228,23 +228,30 @@
 
             const typesVaccines = document.createElement('div')
             
-            const subtitleAndDescription = () => {
-
-              
-              const subtitleDisease = document.createElement('h4')
-              subtitleDisease.textContent = data.vaccinations.map((value) => value.name)
-              const descriptionDisease = document.createElement('p')
-              descriptionDisease.textContent = data.vaccinations.map((value) => value.message)
-
-              return [subtitleDisease, descriptionDisease]
+            console.log(data.vaccinations)
+            for(let i = 0; i <= 10; i++){
+              console.log(i)
+              // const subtitleDisease = document.createElement('h4')
+              // subtitleDisease.textContent = data.vaccinations[i].name
+              // const descriptionDisease = document.createElement('p')
+              // descriptionDisease.textContent = data.vaccinations[i].message
+              // typesVaccines.append(subtitleDisease,descriptionDisease)
             }
-            
-            typesVaccines.append()
+
 
             sectionVaccination.append(titleVaccination,typesVaccines)
 
-
             /* End Section Vaccination */
+
+            /* Start Section Telephone */
+            const sectionTelephone = document.createElement('section')
+
+            const titleTelephone = document.createElement('h3')
+            titleLanguage.textContent = 'Telephone' 
+
+            const continuacionTelephone = 'aqui quede'
+
+            /* End Section Telephone */
 
             const container = document.createElement('div')
             container.append(sectionPresentation, sectionAdvise, sectionWater, sectionTimeZone, sectionCurrency, sectionLanguage, sectionVaccination)
