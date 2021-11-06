@@ -87,13 +87,13 @@
             if(data.advise.CA === undefined) {
                 console.log('Hola Mundo para rellenar')
               } else {
-                secondAdvise.textContent = data.advise.CA.advise
+                secondAdvise.textContent = 'Avoid non-essential travel'
                 urlSecondAdvise.href = data.advise.CA.url
+                urlSecondAdvise.target = '_blank'
+                urlSecondAdvise.rel = 'noopener'
+                urlSecondAdvise.textContent = 'Full report'
               }
               
-            urlSecondAdvise.target = '_blank'
-            urlSecondAdvise.rel = 'noopener'
-            urlSecondAdvise.textContent = 'Full report'
 
             sectionAdvise.append(titleAdvise, firstAdvise, urlFirstAdvise, secondAdvise, urlSecondAdvise)
 
@@ -182,7 +182,6 @@
             /* End Section Currency */
 
 
-
             /* Start Section Language */
             const sectionLanguage = document.createElement('section')
 
@@ -202,9 +201,6 @@
                 return `*${language.language}`
               }
             })}`
-          
-            
-            
 
             sectionLanguage.append(titleLanguage, speakLanguage)
 
@@ -228,16 +224,11 @@
 
             const typesVaccines = document.createElement('div')
             
-            console.log(data.vaccinations)
-            for(let i = 0; i <= 10; i++){
-              console.log(i)
-              // const subtitleDisease = document.createElement('h4')
-              // subtitleDisease.textContent = data.vaccinations[i].name
-              // const descriptionDisease = document.createElement('p')
-              // descriptionDisease.textContent = data.vaccinations[i].message
-              // typesVaccines.append(subtitleDisease,descriptionDisease)
-            }
-
+            const allDisease = data.vaccinations.map((value) => value.name)
+            const allDescriptionDisease = data.vaccinations.map((value) => value.message)
+            
+            const subtitleDisease = document.createElement('h4')
+            const descriptionDisease = document.createElement('p')
 
             sectionVaccination.append(titleVaccination,typesVaccines)
 
@@ -247,14 +238,46 @@
             const sectionTelephone = document.createElement('section')
 
             const titleTelephone = document.createElement('h3')
-            titleLanguage.textContent = 'Telephone' 
+            titleLanguage.textContent = 'Telephone'
 
-            const continuacionTelephone = 'aqui quede'
+            const containerTelephones = document.createElement('div')
 
+            const codeCountry = document.createElement('div')
+            const descriptionCodeCountry = document.createElement('p')
+            descriptionCodeCountry.textContent = `Country Code +${data.telephone.calling_code}`
+            codeCountry.append(descriptionCodeCountry)
+
+            const phonePolice = document.createElement('div')
+            const imgPolice = document.createElement('img')
+            imgPolice.src = './images/police1.png'
+            const numberPolice = document.createElement('p')
+            numberPolice.textContent = data.telephone.police
+            phonePolice.append(imgPolice, numberPolice)
+
+            const ambulance = document.createElement('div')
+            const imgAmbulance = document.createElement('img')
+            imgAmbulance.src = './images/hospital1.png'
+            const numberAmbulance = document.createElement('p')
+            numberAmbulance.textContent = data.telephone.ambulance
+            ambulance.append(imgAmbulance, numberAmbulance)
+
+            const fire = document.createElement('div')
+            const imgFire = document.createElement('img')
+            imgFire.src = './images/firefighter.png'
+            const numberFire = document.createElement('p')
+            numberFire.textContent = data.telephone.fire
+            fire.append(imgFire, numberFire)
+
+            containerTelephones.append(codeCountry, phonePolice, ambulance, fire)
+            
+            sectionTelephone.append(titleTelephone, containerTelephones)
             /* End Section Telephone */
 
+            /* Start Section Electrity */
+
+            /* End Section Electricity */
             const container = document.createElement('div')
-            container.append(sectionPresentation, sectionAdvise, sectionWater, sectionTimeZone, sectionCurrency, sectionLanguage, sectionVaccination)
+            container.append(sectionPresentation, sectionAdvise, sectionWater, sectionTimeZone, sectionCurrency, sectionLanguage, sectionVaccination, sectionTelephone)
 
             const mainContainer = document.querySelector('#app')
             mainContainer.append(container)
