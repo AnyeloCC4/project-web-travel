@@ -225,7 +225,9 @@
             const typesVaccines = document.createElement('div')
             
             const allDisease = data.vaccinations.map((value) => value.name)
+            console.log(allDisease.length)
             const allDescriptionDisease = data.vaccinations.map((value) => value.message)
+            console.log(allDescriptionDisease.length)
             
             const subtitleDisease = document.createElement('h4')
             const descriptionDisease = document.createElement('p')
@@ -277,21 +279,64 @@
 
             const sectionElectricity = document.createElement('section')
 
+            const containerElectricity = document.createElement('div')
+
+            const VoltAndFreq = document.createElement('div')
+
+            const contentVoltAndFreq = document.createElement('p')
+            contentVoltAndFreq.textContent = `${data.electricity.voltage} Volt ${data.electricity.frequency} Herz`
+            VoltAndFreq.append(contentVoltAndFreq)
+
+            const contentPlugins = document.createElement('div')
+
             const plugA = document.createElement('img')
-            // plugA.src = 
+            plugA.src = './'
+            plugA.alt = 'plug type A'
             const plugB = document.createElement('img')
+            plugB.src = './'
+            plugB.alt = 'plug type B'
             const plugC = document.createElement('img')
+            plugC.src = './'
+            plugC.alt = 'plug type C'
             const plugD = document.createElement('img')
+            plugD.src = './'
+            plugD.alt = 'plug type D'
             const plugE = document.createElement('img')
+            plugE.src = './'
+            plugE.alt = 'plug type E'
             const plugF = document.createElement('img')
+            plugF.src = './'
+            plugF.alt = 'plug type F'
             const plugG = document.createElement('img')
+            plugG.src = './'
+            plugG.alt = 'plug type G'
             const plugH = document.createElement('img')
+            plugH.src = './'
+            plugH.alt = 'plug type H'
             const plugI = document.createElement('img')
+            plugI.src = './'
+            plugI.alt = 'plug type I'
             const plugJ = document.createElement('img')
+            plugJ.src = './'
+            plugJ.alt = 'plug type J'
             const plugK = document.createElement('img')
+            plugK.src = './'
+            plugK.alt = 'plug type K'
             const plugL = document.createElement('img')
+            plugL.src = './'
+            plugL.alt = 'plug type L'
             const plugM = document.createElement('img')
+            plugM.src = './'
+            plugM.alt = 'plug type M'
             const plugN = document.createElement('img')
+            plugN.src = './'
+            plugN.alt = 'plug type N'
+
+
+
+            contentPlugins.append()
+
+            VoltAndFreq.append()
 
             sectionElectricity.append()
 
