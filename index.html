@@ -227,11 +227,12 @@
             const allDisease = data.vaccinations.map((value) => value.name)
             const allDescriptionDisease = data.vaccinations.map((value) => value.message)
             
-            const subtitleDisease = document.createElement('h4')
-            const descriptionDisease = document.createElement('p')
-
+            
             for(let i = 0; i < allDisease.length; i++) {
+              const subtitleDisease = document.createElement('h4')
               subtitleDisease.textContent = allDisease[i]
+              
+              const descriptionDisease = document.createElement('p')
               descriptionDisease.textContent = allDescriptionDisease[i]
 
               typesVaccines.append(subtitleDisease, descriptionDisease)

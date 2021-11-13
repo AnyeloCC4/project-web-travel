@@ -24,6 +24,11 @@ h2 {
 h3 {
   font-size: 2rem;
 }
+h4 {
+  font-size: 1.8rem;
+  margin: 5px;
+  padding: 10px;
+}
 p, a{
   font-size: 1.6rem;
   margin: 5px;
