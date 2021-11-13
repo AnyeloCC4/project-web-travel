@@ -14,7 +14,7 @@
   <form action="">
     <h2>Ingresa el nombre de un País</h2>
     <label for="">
-      <input list="countries" placeholder="Nombre de un Pais">
+      <input list="countries" placeholder="Enter a Country Name">
       <datalist id="countries">
         
       </datalist>
@@ -61,10 +61,6 @@
 
             /* End Section Presentation Country */
 
-
-
-
-
             /* Start Section Advice Travel */
 
             const sectionAdvise = document.createElement('section')
@@ -93,15 +89,10 @@
                 urlSecondAdvise.rel = 'noopener'
                 urlSecondAdvise.textContent = 'Full report'
               }
-              
 
             sectionAdvise.append(titleAdvise, firstAdvise, urlFirstAdvise, secondAdvise, urlSecondAdvise)
 
             /* End Section Advise Travel */
-
-
-
-
 
             /* Start Section Water */
             const sectionWater = document.createElement('section')
@@ -129,16 +120,6 @@
 
             /* End Section TimeZone */
             
-            /* Start Section Visa */
-            const sectionVisa = document.createElement('section')
-
-            const titleVisa = document.createElement('h3')
-            titleVisa.textContent = 'Visa requirements'
-
-            sectionVisa.append(titleVisa)
-
-            /* End Section Visa */
-
             /* Start Section Currency */
             const sectionCurrency = document.createElement('section')
 
@@ -204,8 +185,8 @@
 
             sectionLanguage.append(titleLanguage, speakLanguage)
 
-
             /* End Section Language */
+
 
 
 
@@ -215,6 +196,10 @@
             /* End Section Weather */
             
 
+
+
+
+
             /* Start Section Vaccination */
 
             const sectionVaccination = document.createElement('section')
@@ -223,6 +208,8 @@
             titleVaccination.textContent = 'Vaccination and Health'
 
             const typesVaccines = document.createElement('div')
+            console.log(data.vaccinations.length)
+
             
             const allDisease = data.vaccinations.map((value) => value.name)
             const allDescriptionDisease = data.vaccinations.map((value) => value.message)
@@ -234,12 +221,17 @@
               
               const descriptionDisease = document.createElement('p')
               descriptionDisease.textContent = allDescriptionDisease[i]
-
+              
               typesVaccines.append(subtitleDisease, descriptionDisease)
             }
-
+            
             sectionVaccination.append(titleVaccination,typesVaccines)
-
+            if(data.vaccinations.length === 0) {
+              const noRequiredVaccination = document.createElement('p')
+              noRequiredVaccination.textContent = `There are no vaccinations for ${data.names.name}`
+              sectionVaccination.append(noRequiredVaccination)
+            }
+            
             /* End Section Vaccination */
 
             /* Start Section Telephone */
@@ -285,70 +277,31 @@
 
             const sectionElectricity = document.createElement('section')
 
+            const titleElectricity = document.createElement('h3')
+            titleElectricity.textContent = 'Electricity'
+
             const containerElectricity = document.createElement('div')
 
             const VoltAndFreq = document.createElement('div')
-
+            
             const contentVoltAndFreq = document.createElement('p')
             contentVoltAndFreq.textContent = `${data.electricity.voltage} Volt ${data.electricity.frequency} Herz`
             VoltAndFreq.append(contentVoltAndFreq)
+            
+            for(let i = 0; i < data.electricity.plugs.length; i++) {
+              const contentPlugins = document.createElement('div')
+              const typePlug = document.createElement('img')
+              typePlug.src = `./images/Electricity/plug${data.electricity.plugs[i]}.png`
+              typePlug.alt = `plug type ${data.electricity.plugs[i]}`
+              contentPlugins.append(typePlug)
+              VoltAndFreq.append(contentPlugins)
+            }
 
-            const contentPlugins = document.createElement('div')
-
-            const plugA = document.createElement('img')
-            plugA.src = './'
-            plugA.alt = 'plug type A'
-            const plugB = document.createElement('img')
-            plugB.src = './'
-            plugB.alt = 'plug type B'
-            const plugC = document.createElement('img')
-            plugC.src = './'
-            plugC.alt = 'plug type C'
-            const plugD = document.createElement('img')
-            plugD.src = './'
-            plugD.alt = 'plug type D'
-            const plugE = document.createElement('img')
-            plugE.src = './'
-            plugE.alt = 'plug type E'
-            const plugF = document.createElement('img')
-            plugF.src = './'
-            plugF.alt = 'plug type F'
-            const plugG = document.createElement('img')
-            plugG.src = './'
-            plugG.alt = 'plug type G'
-            const plugH = document.createElement('img')
-            plugH.src = './'
-            plugH.alt = 'plug type H'
-            const plugI = document.createElement('img')
-            plugI.src = './'
-            plugI.alt = 'plug type I'
-            const plugJ = document.createElement('img')
-            plugJ.src = './'
-            plugJ.alt = 'plug type J'
-            const plugK = document.createElement('img')
-            plugK.src = './'
-            plugK.alt = 'plug type K'
-            const plugL = document.createElement('img')
-            plugL.src = './'
-            plugL.alt = 'plug type L'
-            const plugM = document.createElement('img')
-            plugM.src = './'
-            plugM.alt = 'plug type M'
-            const plugN = document.createElement('img')
-            plugN.src = './'
-            plugN.alt = 'plug type N'
-
-
-
-            contentPlugins.append()
-
-            VoltAndFreq.append()
-
-            sectionElectricity.append()
+            sectionElectricity.append(titleElectricity, VoltAndFreq)
 
             /* End Section Electricity */
             const container = document.createElement('div')
-            container.append(sectionPresentation, sectionAdvise, sectionWater, sectionTimeZone, sectionCurrency, sectionLanguage, sectionVaccination, sectionTelephone)
+            container.append(sectionPresentation, sectionAdvise, sectionWater, sectionTimeZone, sectionCurrency, sectionLanguage, sectionVaccination, sectionTelephone, sectionElectricity)
 
             const mainContainer = document.querySelector('#app')
             mainContainer.append(container)
