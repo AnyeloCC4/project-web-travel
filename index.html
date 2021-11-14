@@ -58,11 +58,9 @@
             neighbors.textContent = `Other countries in the neighborhood of ${data.names.name} are ${data.neighbors.map((data) => data.name)}`
 
             sectionPresentation.append(nameCountry, fullNameCountry, neighbors)
-
             /* End Section Presentation Country */
 
             /* Start Section Advice Travel */
-
             const sectionAdvise = document.createElement('section')
 
             const titleAdvise = document.createElement('h3')
@@ -91,7 +89,6 @@
               }
 
             sectionAdvise.append(titleAdvise, firstAdvise, urlFirstAdvise, secondAdvise, urlSecondAdvise)
-
             /* End Section Advise Travel */
 
             /* Start Section Water */
@@ -104,7 +101,6 @@
             stateWater.textContent = `Drinkig tap water in ${data.names.name} is ${data.water.short}.`
             
             sectionWater.append(titleWater, stateWater)
-
             /* End Section Water */
 
             /* Start Section  TimeZone*/
@@ -117,7 +113,6 @@
             actualTimeZone.textContent = data.timezone.name
 
             sectionTimeZone.append(titleTimeZone, actualTimeZone)
-
             /* End Section TimeZone */
             
             /* Start Section Currency */
@@ -159,9 +154,7 @@
             formCurrency.append(formCurrencyRate, formCompare)
 
             sectionCurrency.append(titleCurrency, actualCurrency, formCurrency)
-
             /* End Section Currency */
-
 
             /* Start Section Language */
             const sectionLanguage = document.createElement('section')
@@ -170,21 +163,17 @@
             titleLanguage.textContent = 'Language'
 
             const speakLanguage = document.createElement('p')
-            speakLanguage.textContent = `The languages spoken in ${data.names.name} are ${data.language.map( (language) => {
+            speakLanguage.textContent = `The languages spoken in ${data.names.name} ${data.language.map( (language) => {
               if(language.official === 'Yes') {
-                return language.language
+                return `is ${language.language}`
               }
               if(language.official === 'No') {
-
-                const noticeLanguage = document.createElement('span')
-                noticeLanguage.textContent = `(*) Not an official language / spoken in some parts of the country`
-                speakLanguage.append(noticeLanguage)
                 return `*${language.language}`
               }
             })}`
-
-            sectionLanguage.append(titleLanguage, speakLanguage)
-
+            const noticeLanguage = document.createElement('span')
+            noticeLanguage.textContent = 
+            sectionLanguage.append(titleLanguage, speakLanguage, noticeLanguage)
             /* End Section Language */
 
 
@@ -208,12 +197,9 @@
             titleVaccination.textContent = 'Vaccination and Health'
 
             const typesVaccines = document.createElement('div')
-            console.log(data.vaccinations.length)
-
             
             const allDisease = data.vaccinations.map((value) => value.name)
             const allDescriptionDisease = data.vaccinations.map((value) => value.message)
-            
             
             for(let i = 0; i < allDisease.length; i++) {
               const subtitleDisease = document.createElement('h4')
@@ -231,7 +217,6 @@
               noRequiredVaccination.textContent = `There are no vaccinations for ${data.names.name}`
               sectionVaccination.append(noRequiredVaccination)
             }
-            
             /* End Section Vaccination */
 
             /* Start Section Telephone */
@@ -274,7 +259,6 @@
             /* End Section Telephone */
 
             /* Start Section Electrity */
-
             const sectionElectricity = document.createElement('section')
 
             const titleElectricity = document.createElement('h3')
@@ -298,7 +282,6 @@
             }
 
             sectionElectricity.append(titleElectricity, VoltAndFreq)
-
             /* End Section Electricity */
             const container = document.createElement('div')
             container.append(sectionPresentation, sectionAdvise, sectionWater, sectionTimeZone, sectionCurrency, sectionLanguage, sectionVaccination, sectionTelephone, sectionElectricity)
