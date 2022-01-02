@@ -163,13 +163,8 @@
             titleLanguage.textContent = 'Language'
 
             const speakLanguage = document.createElement('p')
-            speakLanguage.textContent = `The languages spoken in ${data.names.name} ${data.language.map( (language) => {
-              if(language.official === 'Yes') {
-                return `is ${language.language}`
-              }
-              if(language.official === 'No') {
-                return `*${language.language}`
-              }
+            speakLanguage.textContent = `The languages spoken in ${data.names.name} ${data.language.find((language) => language.language === 'No' ? 'are' : 'is')} ${data.language.map( (language) => {
+              return language.language
             })}`
             const noticeLanguage = document.createElement('span')
             noticeLanguage.textContent = 
@@ -177,16 +172,10 @@
             /* End Section Language */
 
 
-
-
-
             /* Start Section Weather */
 
             /* End Section Weather */
             
-
-
-
 
 
             /* Start Section Vaccination */
@@ -283,6 +272,7 @@
 
             sectionElectricity.append(titleElectricity, VoltAndFreq)
             /* End Section Electricity */
+
             const container = document.createElement('div')
             container.append(sectionPresentation, sectionAdvise, sectionWater, sectionTimeZone, sectionCurrency, sectionLanguage, sectionVaccination, sectionTelephone, sectionElectricity)
 
